@@ -1,14 +1,17 @@
 export default function toDoList() {
   let todos = [];
 
-  this.add = (todo) => {
+  function add(todo) {
     todos.push(todo);
-  };
+  }
 
-  this.remove = (todo) => {
-    const newToDo = todos.filter((toDoItem) => toDoItem.id !== todo.id);
-    todos = newToDo;
-  };
+  function remove(todo) {
+    todos = todos.filter((toDoItem) => toDoItem.getId() !== todo.getId());
+  }
 
-  this.getTodos = () => todos;
+  function getTodos() {
+    return Object.freeze([...todos]);
+  }
+
+  return Object.freeze({ add, remove, getTodos });
 }
