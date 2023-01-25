@@ -1,0 +1,71 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  text-align: left;
+}
+
+/* MAIN LAYOUT */
+
+.container {
+  font-size: 1.3rem;
+}
+
+.title {
+  border-bottom: 1px solid greenyellow;
+}
+
+/* HEADER */
+
+.header {
+}
+
+/* MAIN */
+
+.main {
+  display: grid;
+  grid-template: auto auto / 1fr;
+}
+
+.main-left,
+.main-right {
+  padding: 1em;
+}
+
+/* NAV BAR */
+
+.projects-title,
+.home-title,
+.project-title {
+  margin-bottom: 0.5em;
+}
+
+.home-section,
+.projects-section {
+  margin: 1em 0;
+}
+
+.tab {
+  margin: 0.3em;
+}
+
+/* TODO ITEMS */
+
+.project-title {
+  text-align: center;
+}
+
+.todo-container {
+  display: grid;
+  grid-template-rows: (auto-fill, minmax(400px, 1fr));
+  gap: 1em;
+}
+
+.todo-item {
+  display: flex;
+}
