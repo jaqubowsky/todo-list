@@ -33,6 +33,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "toDo",
       filename: "index.html",
+      template: "template.html",
     }),
   ],
 };
