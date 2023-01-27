@@ -13,17 +13,20 @@ body {
 /* MAIN LAYOUT */
 
 .container {
+  position: relative;
   font-size: 1.3rem;
+  min-height: 100vh;
 }
 
 .title {
   border-bottom: 1px solid greenyellow;
 }
 
-/* HEADER */
-
-.header {
+.active {
+  color: red;;
 }
+
+/* HEADER */
 
 /* MAIN */
 
@@ -40,7 +43,7 @@ body {
 /* NAV BAR */
 
 .projects-title,
-.home-title,
+.main-title,
 .project-title {
   margin-bottom: 0.5em;
 }
@@ -68,4 +71,35 @@ body {
 
 .todo-item {
   display: flex;
+}
+
+/* MODAL */
+
+.todo-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #252525;
+  opacity: 0.7;
+}
+
+.modal-inner {
+  background-color: whitesmoke;
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+}
+
+.hidden {
+  display: none;
 }
