@@ -22,93 +22,53 @@
         <div class="main">
           <div class="main-left">
             <nav class="side-bar">
-              <div class="home-section">
-                <h1 class="home-title title">
-                  <i class="fa-sharp fa-solid fa-calendar-week"></i>Home
+              <div class="main-section-container">
+                <h1 class="main-title title">
+                  <i class="fa-sharp fa-solid fa-calendar-week"></i>Main
                 </h1>
-                <ul class="nav-bar" id="navBar"></ul>
+                <ul class="nav-bar" id="mainSectionContainer"></ul>
               </div>
-              <div class="projects-section">
+              <div class="projects-section-container">
                 <h1 class="projects-title title">
                   <i class="fa-sharp fa-solid fa-calendar-week"></i>Projects
                 </h1>
+                <ul class="nav-bar" id="projectsSectionContainer">
+                </ul>
               </div>
             </nav>
-            <button class="btn add-btn">+</button>
+            <button class="btn add-project-btn">+</button>
             <span class="add-btn-text">Add project</span>
           </div>
           <div class="main-right">
-            <h1 class="project-title">Sample Title</h1>
-            <div class="todo-container">
-              <div class="todo-item high">
-                <button class="btn checkbox-btn">
-                  <i class="fa-regular fa-square"></i>
-                </button>
-                <p class="todo-name">Brush Teeth</p>
-                <button class="btn btn-details">Details</button>
-                <p class="todo-date">there is no date</p>
-                <button class="btn edit-btn">
-                  <i class="fa-regular fa-pen-to-square"></i>
-                </button>
-                <button class="btn delete-btn">
-                  <i class="fa-regular fa-trash-can"></i>
-                </button>
-              </div>
-              <div class="todo-item high">
-                <button class="btn checkbox-btn">
-                  <i class="fa-regular fa-square"></i>
-                </button>
-                <p class="todo-name">Brush Teeth</p>
-                <button class="btn btn-details">Details</button>
-                <p class="todo-date">there is no date</p>
-                <button class="btn edit-btn">
-                  <i class="fa-regular fa-pen-to-square"></i>
-                </button>
-                <button class="btn delete-btn">
-                  <i class="fa-regular fa-trash-can"></i>
-                </button>
-              </div>
-              <div class="todo-item high">
-                <button class="btn checkbox-btn">
-                  <i class="fa-regular fa-square"></i>
-                </button>
-                <p class="todo-name">Brush Teeth</p>
-                <button class="btn btn-details">Details</button>
-                <p class="todo-date">there is no date</p>
-                <button class="btn edit-btn">
-                  <i class="fa-regular fa-pen-to-square"></i>
-                </button>
-                <button class="btn delete-btn">
-                  <i class="fa-regular fa-trash-can"></i>
-                </button>
-              </div>
-            </div>
-            <button class="btn add-btn">+</button>
+            <div class="todo-container" id="todoContainer"></div>
+            <button class="btn add-todo-btn">+</button>
             <span class="add-btn-text">Add todo</span>
           </div>
         </div>
         <div class="footer"></div>
       </div>
-      <div class="todo-modal">
+      <div class="todo-modal hidden">
         <div class="modal-inner">
-          <form>
-            <label for="todo-title"></label>
-            <input type="text" class="todo-title" id="todo-title" />
-            <label for="todo-description"></label>
-            <input type="text" class="todo-description" id="todo-description" />
-            <label for="todo-notes"></label>
-            <input type="text" class="todo-notes" id="todo-notes" />
-            <label for="todo-priority"></label>
+          <form class="todo-form" id="todoForm">
+            <label for="todo-title" name="todo-title">Title:</label>
+            <input type="text" class="todo-title" id="todoTitle" required />
+            <label for="todo-notes" name="todo-notes">Notes</label>
+            <input type="text" class="todo-notes" id="todoNotes" required />
+            <label for="todo-date" name="todo-date">Due Date</label>
+            <input type="date" name="todo-date" id="todoDate" required />
+            <label for="todo-priority">Priority:</label>
             <select
               class="todo-priority"
-              id="todo-priority"
+              id="todoPriority"
               name="todo-priority"
             >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
-            <input type="btn submit-btn" />
+            <button type="submit" class="submit-btn btn" id="submitBtn">
+              Submit
+            </button>
           </form>
         </div>
       </div>
