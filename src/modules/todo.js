@@ -1,24 +1,22 @@
 import uuid4 from "uuid4";
 
-export const toDo = (title, description, notes, priority, isComplete, dueDate) => {
+export const createTodo = (title, notes, priority, isComplete, dueDate) => {
   const id = uuid4();
 
   const getId = () => id;
 
-  const editData = (title, description, notes, priority) => {
+  const editData = (title, notes, priority) => {
     this.title = title,
-    this.description = description,
     this.notes = notes,
     this.priority = priority
   }
 
   return {
     title,
-    description,
     dueDate,
     notes,
     priority,
-    isComplete,
+    isComplete: isComplete || false,
     getId,
     editData,
   };

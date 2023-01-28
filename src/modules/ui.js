@@ -38,59 +38,30 @@ export const uiController = (function () {
     });
   };
 
-  const switchActiveStatus = (target) => {
-    const tabs = document.querySelectorAll(".tab");
-
+  const switchActiveStatus = (target, tabs) => {
     tabs.forEach((tab) => tab.classList.remove("active"));
 
-    target.add("active");
+    target.classList.add("active");
   };
 
-  const renderSampleHome = () => {
-    const mainSection = document.getElementById("mainSectionContainer");
-
-    allProjects.getProjects().forEach((project) => {
-      if (
-        project.name === "Home" ||
-        project.name === "Today" ||
-        project.name === "Week"
-      ) {
-        mainSection.innerHTML += `<li class="home-tab tab" data-id="${project.getId()}">${
-          project.name
-        } </li>`;
-      }
-    });
-
-    const homeTab = document.querySelector(".home-tab");
-    homeTab.classList.add("active");
-  };
-
-  const renderSampleProjects = () => {
-    const projectsSection = document.getElementById("projectsSectionContainer");
-
-    allProjects.getProjects().forEach((project) => {
-      if (project.name === "Gym" || project.name === "Book") {
-        projectsSection.innerHTML += `<li class="home-tab tab" data-id="${project.getId()}">${
-          project.name
-        } </li>`;
-      }
-    });
-  };
-
-  const renderProject = () => {
-    const projectsSection = document.getElementById("projectSectionContainer");
+  const createProject = () => {
     const projectTitle = document.getElementById("todo-title").value;
 
     const newProject = createProject(projectTitle);
     allProjects.add(newProject);
-    if (projectTitle === "") return;
 
-    projectsSection.innerHTML += ` <li class="tab" id="${newProject.getId()}">${projectTitle}</li> `;
+    return newProject;
+  };
+
+  const renderProject = () => {
+    const projectsSection = document.getElementById("projectSectionContainer");
+
+    projectsSection.innerHTML += ` <li class="tab" id="${createProject().getId()}">${
+      createProject().name
+    }</li> `;
   };
 
   const createTodoItem = () => {
-    const activeTab = document.querySelector(".active");
-
     const todoTitle = document.getElementById("todoTitle").value;
     const todoNotes = document.getElementById("todoNotes").value;
     const todoDueDate = document.getElementById("todoDate").value;
@@ -104,12 +75,20 @@ export const uiController = (function () {
       todoDueDate
     );
 
+    return newTodo;
+  };
+
+  const renderTodoItem = () => {
+    const activeTab = document.querySelector(".active");
+
     allProjects.getProjects().forEach((project) => {
       if (project.getId() === activeTab.dataset.id || project.name === "Home") {
-        project.add(newTodo);
+        project.add(createTodoItem());
       }
     });
   };
+
+  const renderModal = () => {};
 
   const clearInputs = () => {
     const allInputs = document.querySelectorAll("input");
@@ -118,13 +97,13 @@ export const uiController = (function () {
   };
 
   return {
-    renderSampleProjects,
     toggleAddModal,
     renderProject,
-    createTodoItem,
+    renderTodoItem,
     clearInputs,
-    renderSampleHome,
+    renderModal,
     renderTabContainer,
     switchActiveStatus,
+    allProjects,
   };
 })();

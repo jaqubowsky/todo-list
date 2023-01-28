@@ -32,44 +32,29 @@
                 <h1 class="projects-title title">
                   <i class="fa-sharp fa-solid fa-calendar-week"></i>Projects
                 </h1>
-                <ul class="nav-bar" id="projectsSectionContainer">
-                </ul>
+                <ul class="nav-bar" id="projectsSectionContainer"></ul>
               </div>
             </nav>
-            <button class="btn add-project-btn">+</button>
-            <span class="add-btn-text">Add project</span>
           </div>
           <div class="main-right">
             <div class="todo-container" id="todoContainer"></div>
-            <button class="btn add-todo-btn">+</button>
-            <span class="add-btn-text">Add todo</span>
+            <button class="btn add-btn">+</button>
           </div>
         </div>
         <div class="footer"></div>
       </div>
       <div class="todo-modal hidden">
         <div class="modal-inner">
-          <form class="todo-form" id="todoForm">
-            <label for="todo-title" name="todo-title">Title:</label>
-            <input type="text" class="todo-title" id="todoTitle" required />
-            <label for="todo-notes" name="todo-notes">Notes</label>
-            <input type="text" class="todo-notes" id="todoNotes" required />
-            <label for="todo-date" name="todo-date">Due Date</label>
-            <input type="date" name="todo-date" id="todoDate" required />
-            <label for="todo-priority">Priority:</label>
-            <select
-              class="todo-priority"
-              id="todoPriority"
-              name="todo-priority"
-            >
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-            </select>
-            <button type="submit" class="submit-btn btn" id="submitBtn">
-              Submit
-            </button>
-          </form>
+          <h1>Create new...</h1>
+          <nav class="modal-nav">
+            <ul class="modal-tab">
+              Project
+            </ul>
+            <ul class="modal-tab">
+              Todo
+            </ul>
+          </nav>
+          <div class="form-container" id="formContainer"></div>
         </div>
       </div>
     </div>
