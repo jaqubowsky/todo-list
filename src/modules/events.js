@@ -1,6 +1,8 @@
 import { uiController } from "./ui";
 
 export const eventListeners = (function () {
+  const formContainer = document.getElementById("formContainer");
+
   document.addEventListener("click", (e) => {
     if (e.target.classList.contains("add-btn")) {
       uiController.toggleAddModal();
@@ -18,19 +20,20 @@ export const eventListeners = (function () {
       console.log(e.target.textContent);
       uiController.renderModal(e);
     }
+  });
 
-    if (e.target.classList.contains("add-project-btn")) {
+  formContainer.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (e.submitter.classList.contains("add-project-btn")) {
       uiController.renderProject();
-      uiController.toggleAddModal();
-      uiController.clearInputs();
+    }
+    if (e.submitter.classList.contains("add-todo-btn")) {
+      uiController.renderTodoItem();
     }
 
-    if (e.target.classList.contains("add-todo-btn")) {
-      uiController.renderTodoItem();
-      uiController.toggleAddModal();
-      uiController.clearInputs();
-      uiController.renderTabContainer();
-    }
+    uiController.renderTabContainer();
+    uiController.toggleAddModal();
+    uiController.clearInputs();
   });
 
   const navModalChildren = document.querySelector(".modal-nav").children;

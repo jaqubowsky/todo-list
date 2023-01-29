@@ -82,7 +82,10 @@ export const uiController = (function () {
     const activeTab = document.querySelector(".active");
 
     allProjects.getProjects().forEach((project) => {
-      if (project.getId() === activeTab.dataset.id || project.getTitle() === "Home") {
+      if (
+        project.getId() === activeTab.dataset.id ||
+        project.getTitle() === "Home"
+      ) {
         project.add(createTodoItem());
       }
     });
@@ -96,7 +99,7 @@ export const uiController = (function () {
     if (e.target.textContent === "Project") {
       formContainer.innerHTML = ` 
     <label for="projectTitle">Project title: </label> 
-    <input type="text" class="project-title" id="projectTitle" name="projectTitle">
+    <input type="text" class="project-title" id="projectTitle" name="projectTitle" required>
     <button type="submit" class="btn add-project-btn">Add project</button>  
     `;
     }
@@ -104,11 +107,11 @@ export const uiController = (function () {
     if (e.target.textContent === "Todo") {
       formContainer.innerHTML = `
     <label for="todoTitle">Todo title: </label> 
-    <input type="text" class="todo-title" id="todoTitle" name="todoTitle">
+    <input type="text" class="todo-title" id="todoTitle" name="todoTitle" required>
     <label for="todoNote">Todo note: </label> 
-    <input type="textarea" class="todo-note" id="todoNote" name="todoNote">
+    <input type="textarea" class="todo-note" id="todoNote" name="todoNote" required>
     <label for="todoDate">Todo due date: </label> 
-    <input type="date" class="todo-dueDate" id="todoDueDate" name="todoDueDate">
+    <input type="date" class="todo-dueDate" id="todoDueDate" name="todoDueDate" required>
     <label for="todoPriority">Todo priority: </label> 
     <select for="todoPriority" name="todoPriority" id="todoPriority">
       <option value="low">Low</option>
