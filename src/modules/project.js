@@ -1,9 +1,9 @@
 import uuid4 from "uuid4";
 
 export default function createProject(name) {
-  this.name = name;
+  const title = name
 
-  let id = uuid4();
+  const id = uuid4();
   let todos = [];
 
   function add(todo) {
@@ -18,9 +18,13 @@ export default function createProject(name) {
     return Object.freeze([...todos]);
   }
 
+  function getTitle() {
+    return title
+  }
+
   function getId() {
     return Object.freeze(id);
   }
 
-  return Object.freeze({ name, add, remove, getTodos, getId });
+  return Object.freeze({ getTitle, add, remove, getTodos, getId });
 }
