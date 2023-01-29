@@ -9,13 +9,11 @@ export const pageInitializer = (function () {
 
     allProjects.getProjects().forEach((project) => {
       if (
-        project.name === "Home" ||
-        project.name === "Today" ||
-        project.name === "Week"
+        project.getTitle() === "Home" ||
+        project.getTitle() === "Today" ||
+        project.getTitle() === "Week"
       ) {
-        mainSection.innerHTML += `<li class="home-tab tab" data-id="${project.getId()}">${
-          project.name
-        } </li>`;
+        mainSection.innerHTML += `<li class="home-tab tab" data-id="${project.getId()}">${project.getTitle()} </li>`;
       }
     });
 
@@ -28,10 +26,8 @@ export const pageInitializer = (function () {
     const projectsSection = document.getElementById("projectsSectionContainer");
 
     allProjects.getProjects().forEach((project) => {
-      if (project.name === "Gym" || project.name === "Book") {
-        projectsSection.innerHTML += `<li class="home-tab tab" data-id="${project.getId()}">${
-          project.name
-        } </li>`;
+      if (project.getTitle() === "Gym" || project.getTitle() === "Book") {
+        projectsSection.innerHTML += `<li class="home-tab tab" data-id="${project.getId()}">${project.getTitle()} </li>`;
       }
     });
   };
