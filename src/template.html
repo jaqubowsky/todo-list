@@ -37,21 +37,27 @@
             </nav>
           </div>
           <div class="main-right">
+            <h1 class="active-project-title">Sample project title</h1>
             <div class="todo-container" id="todoContainer"></div>
             <button class="btn add-btn">+</button>
           </div>
         </div>
         <div class="footer"></div>
       </div>
-      <div class="todo-modal hidden">
-        <div class="modal-inner">
-          <h1>Create new...</h1>
-          <nav class="modal-nav">
-            <ul class="modal-tab">Project</ul>
-            <ul class="modal-tab">Todo</ul>
-          </nav>
-          <form class="form-container" id="formContainer"></form>
-        </div>
+    </div>
+    <div class="todo-modal hidden">
+      <div class="modal-inner">
+        <h1>Create new...</h1>
+        <nav class="modal-nav">
+          <ul class="modal-tab active">
+            Project
+          </ul>
+          <ul class="modal-tab">
+            Todo
+          </ul>
+        </nav>
+        <form class="form-container" id="formContainer"></form>
+        <button class="exit-btn">X</button>
       </div>
     </div>
   </body>

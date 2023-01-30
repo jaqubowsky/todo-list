@@ -35,6 +35,7 @@ export const pageInitializer = (function () {
   const initializePage = () => {
     renderSampleHome();
     renderSampleProjects();
+    uiController.renderModal();
   };
 
   return { initializePage };

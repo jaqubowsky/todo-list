@@ -19,20 +19,30 @@ export const uiController = (function () {
     allProjects.getProjects().forEach((project) => {
       if (project.getId() === activeTab.dataset.id) {
         project.getTodos().forEach((todo) => {
-          todoContainer.innerHTML += ` <div class="todo-item" id="${todo.getId()}">
-                <button class="btn checkbox-btn">
+          todoContainer.innerHTML += ` 
+          <div class="todo-item" id="${todo.getId()}">
+            <div class="todo-info">
+                <button class="todo-btn checkbox-btn">
                   <i class="fa-regular fa-square"></i>
                 </button>
                 <p class="todo-name">${todo.title}</p>
-                <button class="btn btn-details">Details</button>
+                </div>
+                <div class="todo-option">
                 <p class="todo-date">${todo.dueDate}</p>
-                <button class="btn edit-btn">
+                <div class="todo-option-btns">
+                <button class="todo-btn edit-btn">
                   <i class="fa-regular fa-pen-to-square"></i>
                 </button>
-                <button class="btn delete-btn">
+                <button class="todo-btn btn-details">
+                <i class="fa-regular fa-circle-question"></i>
+                </button>
+                <button class="todo-btn delete-btn">
                   <i class="fa-regular fa-trash-can"></i>
                 </button>
-              </div>`;
+                </div>
+                </div>
+              </div>
+              `;
         });
       }
     });
@@ -92,19 +102,16 @@ export const uiController = (function () {
   };
 
   const renderModal = (e) => {
+    
     const formContainer = document.getElementById("formContainer");
 
-    formContainer.innerHTML = "";
-
-    if (e.target.textContent === "Project") {
-      formContainer.innerHTML = ` 
+    formContainer.innerHTML = ` 
     <label for="projectTitle">Project title: </label> 
     <input type="text" class="project-title" id="projectTitle" name="projectTitle" required>
     <button type="submit" class="btn add-project-btn">Add project</button>  
     `;
-    }
 
-    if (e.target.textContent === "Todo") {
+    if (e.target.textContent.trim() === "Todo") {
       formContainer.innerHTML = `
     <label for="todoTitle">Todo title: </label> 
     <input type="text" class="todo-title" id="todoTitle" name="todoTitle" required>

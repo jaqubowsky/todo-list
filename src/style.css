@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
 *,
 *::after,
 *::before {
@@ -8,36 +10,66 @@
 
 body {
   text-align: left;
+  font-family: "Roboto", sans-serif;
+  color: #374958;
+  position: relative;
 }
 
 /* MAIN LAYOUT */
 
 .container {
-  position: relative;
   font-size: 1.3rem;
   min-height: 100vh;
+  height: 100%;
 }
 
 .title {
-  border-bottom: 1px solid greenyellow;
+  color: #252525;
+  border-bottom: 2px solid #2abd67;
 }
 
 .active {
-  color: red;;
+  background-color: #2abd6770;
+  border-left: 4px solid #2abd67;
+}
+
+i {
+  margin: 0 0.2em !important;
 }
 
 /* HEADER */
+
+.header {
+  text-align: center;
+  padding: 0.5em;
+}
 
 /* MAIN */
 
 .main {
   display: grid;
-  grid-template: auto auto / 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 
 .main-left,
 .main-right {
-  padding: 1em;
+  padding: 0.3em 1em;
+  height: 100%;
+}
+
+.main-right {
+  background-color: #ececec;
+  min-height: 100%;
+  height: 100%;
+}
+
+.main-section-container,
+.projects-section-container {
+  margin: 1.2em 0;
+}
+
+.projects-section-container {
+  margin-bottom: 0;
 }
 
 /* NAV BAR */
@@ -53,8 +85,16 @@ body {
   margin: 1em 0;
 }
 
+.tab,
+.modal-tab {
+  margin: 0.5em;
+  padding: 0.3em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .tab {
-  margin: 0.3em;
+  list-style-type: none;
 }
 
 /* TODO ITEMS */
@@ -65,12 +105,92 @@ body {
 
 .todo-container {
   display: grid;
-  grid-template-rows: (auto-fill, minmax(400px, 1fr));
   gap: 1em;
 }
 
 .todo-item {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #2abd67;
+  font-size: 1.1rem;
+  padding-bottom: 0.5em;
+}
+
+.todo-info,
+.todo-option {
+  margin: 0 0.4em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-option {
+  flex-direction: column;
+}
+
+.todo-name {
+  margin: 0 0.3em;
+}
+
+/* PROJECT */
+
+.active-project-title {
+  font-size: 2rem;
+  padding: 0.5em;
+  background-color: #2abd67;
+  text-align: center;
+  margin: 1em 0;
+  color: whitesmoke;
+  border-radius: 7px;
+}
+
+/* BUTTONS */
+.btn {
+  cursor: pointer;
+  background-color: #2abd67 !important;
+  font-size: 1.5rem;
+  color: #252525;
+  font-family: inherit !important;
+}
+
+.add-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  border: 0.5px solid #252525;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.add-project-btn,
+.add-todo-btn {
+  width: 100%;
+  border-radius: 7px;
+  border: none;
+  padding: 0.2em 0.5em;
+}
+
+.todo-btn,
+.exit-btn {
+  background-color: transparent;
+  border: none;
+  font-size: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+
+.todo-option-btns {
+  margin: 0.2em 0;
+}
+
+.exit-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: red;
 }
 
 /* MODAL */
@@ -80,24 +200,39 @@ body {
   justify-content: center;
   align-items: center;
   position: absolute;
+  min-height: 100vh;
+  height: 100%;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: #252525;
-  opacity: 0.7;
+  background-color: rgba(37, 37, 37, 0.7);
 }
 
 .modal-inner {
+  position: absolute;
+  z-index: 9999;
   background-color: whitesmoke;
+  width: 90%;
+  padding: 1em;
+  font-size: 1.2rem;
 }
 
-.todo-form {
+.form-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2em;
+  padding: 0.6em 0;
+}
+
+input,
+select {
+  outline-color: #2abd67;
+  padding: 0.7em;
+  font-size: inherit;
+  font-family: inherit;
+  margin-bottom: 0.7em;
 }
 
 .hidden {
