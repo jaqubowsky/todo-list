@@ -2,6 +2,7 @@ import { uiController } from "./ui";
 import { eventListeners } from "./events";
 
 export const pageInitializer = (function () {
+  const formProjectContainer = document.getElementById("formProjectContainer");
   const allProjects = uiController.allProjects;
 
   const renderSampleHome = () => {
@@ -35,7 +36,7 @@ export const pageInitializer = (function () {
   const initializePage = () => {
     renderSampleHome();
     renderSampleProjects();
-    uiController.renderModal();
+    uiController.renderModal(formProjectContainer);
   };
 
   return { initializePage };
