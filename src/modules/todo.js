@@ -1,6 +1,6 @@
 import uuid4 from "uuid4";
 
-export const createTodo = (title, notes, priority, isComplete, dueDate) => {
+export const createTodo = (title, notes, priority, isComplete = false, dueDate) => {
   const id = uuid4();
 
   const getId = () => id;
@@ -16,7 +16,7 @@ export const createTodo = (title, notes, priority, isComplete, dueDate) => {
     dueDate,
     notes,
     priority,
-    isComplete: isComplete || false,
+    isComplete,
     getId,
     editData,
   };
