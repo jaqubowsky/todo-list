@@ -5,21 +5,30 @@ import projectsContainer from "./allProjects";
 export const uiController = (function () {
   const allProjects = projectsContainer();
 
-  const toggleAddModal = () => {
-    const openAddModal = document.querySelector(".todo-modal");
+  const getSelectedProject = () => {
+    const activeTab = document.querySelector(".active");
+
+    return allProjects
+      .getProjects()
+      .filter((project) => project.getId() == activeTab.dataset.id)[0];
+  };
+
+  const toggleModalVisibility = () => {
+    const openAddModal = document.getElementById("todoModal");
 
     openAddModal.classList.toggle("hidden");
   };
 
-  const renderTabContainer = () => {
+  const renderTodos = () => {
     const todoContainer = document.getElementById("todoContainer");
-    const activeTab = document.querySelector(".active");
+    let todoContainerHTML = "";
     todoContainer.innerHTML = "";
 
-    allProjects.getProjects().forEach((project) => {
-      if (project.getId() === activeTab.dataset.id) {
-        project.getTodos().forEach((todo) => {
-          todoContainer.innerHTML += ` 
+    getSelectedProject()
+      .getTodos()
+      .forEach(
+        (todo) =>
+          (todoContainerHTML += ` 
           <div class="todo-item" id="${todo.getId()}">
             <div class="todo-info">
                 <button class="todo-btn checkbox-btn">
@@ -42,19 +51,21 @@ export const uiController = (function () {
                 </div>
                 </div>
               </div>
-              `;
-        });
-      }
-    });
+              `)
+      );
+
+    todoContainer.innerHTML = todoContainerHTML;
   };
 
   const switchActiveStatus = (target, tabs) => {
+    if (target.classList.contains("active")) return;
+
     tabs.forEach((tab) => tab.classList.remove("active"));
 
     target.classList.add("active");
   };
 
-  const createProjectObject = () => {
+  const createProjectItem = () => {
     const projectTitle = document.getElementById("projectTitle").value;
 
     const newProject = createProject(projectTitle);
@@ -65,10 +76,15 @@ export const uiController = (function () {
 
   const renderProject = () => {
     const projectsSection = document.getElementById("projectsSectionContainer");
+    const projectItem = document.createElement("li");
+    projectItem.classList.add(
+      `${createProjectItem().getTitle().toLowerCase()}-tab}`
+    );
+    projectItem.classList.add("tab");
+    projectItem.dataset.id = createProjectItem().getId();
+    projectItem.textContent = createProjectItem().getTitle();
 
-    projectsSection.innerHTML += ` <li class="${createProjectObject()
-      .getTitle()
-      .toLowerCase()}-tab tab" data-id="${createProjectObject().getId()}">${createProjectObject().getTitle()}</li> `;
+    projectsSection.appendChild(projectItem);
   };
 
   const createTodoItem = () => {
@@ -77,57 +93,33 @@ export const uiController = (function () {
     const todoDueDate = document.getElementById("todoDueDate").value;
     const todoPriority = document.getElementById("todoPriority").value;
 
-    const newTodo = createTodo(
+    return (newTodoItem = createTodo(
       todoTitle,
       todoNotes,
       todoPriority,
       false,
       todoDueDate
-    );
-
-    return newTodo;
+    ));
   };
 
-  const renderTodoItem = () => {
+  const addTodoItem = () => {
     const activeTab = document.querySelector(".active");
 
     allProjects.getProjects().forEach((project) => {
       if (
         project.getId() === activeTab.dataset.id ||
         project.getTitle() === "Home"
-      ) {
+      )
         project.add(createTodoItem());
-      }
     });
   };
 
-  const renderModal = (e) => {
-    
-    const formContainer = document.getElementById("formContainer");
+  const renderModal = (target) => {
+    const formContainers = document.querySelectorAll("form");
 
-    formContainer.innerHTML = ` 
-    <label for="projectTitle">Project title: </label> 
-    <input type="text" class="project-title" id="projectTitle" name="projectTitle" required>
-    <button type="submit" class="btn add-project-btn">Add project</button>  
-    `;
+    formContainers.forEach((container) => container.classList.add("hidden"));
 
-    if (e.target.textContent.trim() === "Todo") {
-      formContainer.innerHTML = `
-    <label for="todoTitle">Todo title: </label> 
-    <input type="text" class="todo-title" id="todoTitle" name="todoTitle" required>
-    <label for="todoNote">Todo note: </label> 
-    <input type="textarea" class="todo-note" id="todoNote" name="todoNote" required>
-    <label for="todoDate">Todo due date: </label> 
-    <input type="date" class="todo-dueDate" id="todoDueDate" name="todoDueDate" required>
-    <label for="todoPriority">Todo priority: </label> 
-    <select for="todoPriority" name="todoPriority" id="todoPriority">
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
-    </select>
-    <button type="submit" class="btn add-todo-btn">Add todo</button>  
-    `;
-    }
+    target.classList.remove("hidden");
   };
 
   const clearInputs = () => {
@@ -137,12 +129,13 @@ export const uiController = (function () {
   };
 
   return {
-    toggleAddModal,
+    toggleModalVisibility,
     renderProject,
-    renderTodoItem,
+    addTodoItem,
     clearInputs,
     renderModal,
-    renderTabContainer,
+    renderTodos,
+    getSelectedProject,
     switchActiveStatus,
     allProjects,
   };
