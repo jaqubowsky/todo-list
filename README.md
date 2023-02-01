@@ -40,7 +40,7 @@
     </li>
     <li><a href="#contact">Contact</a></li>
     <li>
-      <a href="#left to do">Left to do</a>
+      <a href="#lefttodo">Left to do</a>
     </li>
   </ol>
 </details>
