@@ -18,8 +18,10 @@ export default function projectsContainer() {
     return projects;
   }
 
-  function deleteProject(id) {
-    projects = projects.filter((projectItem) => projectItem.getId() !== id);
+  function deleteProject(target) {
+    projects = projects.filter(
+      (projectItem) => projectItem.getId() !== target.dataset.id
+    );
   }
 
   return { getProjects, add, deleteProject };

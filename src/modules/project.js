@@ -11,7 +11,7 @@ export default function createProject(name) {
   }
 
   function deleteTodo(todo) {
-    todos = todos.filter((toDoItem) => toDoItem.getId() !== todo.id);
+    todos = todos.filter((toDoItem) => toDoItem.getId() !== todo.dataset.id);
   }
 
   function getTodos() {
