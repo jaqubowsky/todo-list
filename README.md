@@ -48,9 +48,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<div align="center">
+<p align="center">
 [![Todo App Project Screenshot][product-screenshot]](https://jaqubowsky.github.io/todo-list/)
-</div>
+</p>
   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
