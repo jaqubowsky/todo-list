@@ -48,9 +48,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<p align="center">
-[<img alt="todo app preview" src="src/images/mobile.png" />](https://jaqubowsky.github.io/todo-list/)
-</p>
+[![Todo App Project Screenshot][product-screenshot]](https://jaqubowsky.github.io/todo-list/)
   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -113,3 +111,5 @@ Project Link: (https://github.com/jaqubowsky/todo-list)
 [JavaScript]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
 [HTML5]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
 [CSS3]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
+[product-screenshot]: src/images/mobile.jpg
+
