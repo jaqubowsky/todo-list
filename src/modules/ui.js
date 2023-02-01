@@ -90,7 +90,7 @@ export const uiController = (function () {
     const trashIcon = document.createElement("i");
     const newProject = createProjectItem();
 
-    projectItem.classList.add(`${newProject.getTitle().toLowerCase()}-tab`);
+    projectItem.classList.add("project-tab");
     projectItem.classList.add("tab");
     deleteBtn.classList.add("todo-btn");
     deleteBtn.classList.add("delete-project-btn");

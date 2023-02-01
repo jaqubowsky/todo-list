@@ -2,7 +2,6 @@ import { uiController } from "./ui";
 import createProject from "./project";
 
 export const eventListeners = (function () {
-  const mainContainer = document.getElementById("mainSectionContainer");
   const formsContainer = document.querySelectorAll("form");
   const exitBtn = document.getElementById("exitBtn");
   const todoTab = document.querySelector("[data-todo-tab]");
@@ -42,16 +41,11 @@ export const eventListeners = (function () {
     }
 
     if (e.target.classList.contains("delete-project-btn")) {
-      if (e.target.parentElement.parentElement.classList.contains("active")) {
-        const tabs = document.querySelectorAll(".tab");
-        uiController.switchActiveStatus(
-          projectsSectionContainer.lastChild,
-          tabs
-        );
+      const tabs = document.querySelectorAll(".tab");
+      const mainContainer = document.getElementById("mainSectionContainer");
 
-        if (projectsSectionContainer.children.length === 1) {
-          uiController.switchActiveStatus(mainContainer.firstChild, tabs);
-        }
+      if (e.target.parentElement.parentElement.classList.contains("active")) {
+        uiController.switchActiveStatus(mainContainer.firstChild, tabs);
       }
 
       uiController.deleteProjectItem(e.target.parentElement.parentElement);

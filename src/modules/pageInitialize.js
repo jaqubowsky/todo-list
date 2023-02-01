@@ -28,7 +28,7 @@ export const pageInitializer = (function () {
 
     allProjects.getProjects().forEach((project) => {
       if (project.getTitle() === "Gym" || project.getTitle() === "Book") {
-        projectsSection.innerHTML += `<li class="main-tab tab" data-id="${project.getId()}">${project.getTitle()}<button class="todo-btn delete-project-btn">
+        projectsSection.innerHTML += `<li class="project-tab tab" data-id="${project.getId()}">${project.getTitle()}<button class="todo-btn delete-project-btn">
                   <i class="fa-regular fa-trash-can delete-project-btn"></i>
                 </button></li>`;
       }
