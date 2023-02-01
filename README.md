@@ -91,6 +91,7 @@
 <li>edit todo details</li>
 <li>edit project name</li>
 <li>sort todos by date</li>
+<li>computer layout</li>
 <li> firebase or local storage</li>
 </ul>
 
