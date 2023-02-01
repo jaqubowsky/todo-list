@@ -1,5 +1,5 @@
 import { uiController } from "./ui";
-import createProject from "./project";
+import createProject from "./todoList";
 
 export const eventListeners = (function () {
   const formsContainer = document.querySelectorAll("form");
@@ -21,6 +21,13 @@ export const eventListeners = (function () {
       uiController.toggleModalVisibility();
     }
 
+    if (e.target.classList.contains("checkbox")) {
+      const todoTab = e.target.parentElement.parentElement.parentElement;
+
+      uiController.changeIsDoneStatus(todoTab);
+      uiController.renderTodos();
+    }
+
     if (e.target.classList.contains("tab")) {
       const tabs = document.querySelectorAll(".tab");
 
@@ -37,25 +44,27 @@ export const eventListeners = (function () {
     }
 
     if (e.target === exitBtn) {
-      document.querySelector(".todo-modal").classList.add("hidden");
+      const todoModal = document.querySelector(".todo-modal");
+      todoModal.classList.add("hidden");
     }
 
     if (e.target.classList.contains("delete-project-btn")) {
       const tabs = document.querySelectorAll(".tab");
       const mainContainer = document.getElementById("mainSectionContainer");
+      const projectItem = e.target.parentElement.parentElement;
 
-      if (e.target.parentElement.parentElement.classList.contains("active")) {
+      if (projectItem.classList.contains("active")) {
         uiController.switchActiveStatus(mainContainer.firstChild, tabs);
       }
 
-      uiController.deleteProjectItem(e.target.parentElement.parentElement);
+      uiController.deleteProjectItem(projectItem);
     }
 
     if (e.target.classList.contains("delete-todo-btn")) {
-      uiController.deleteTodoItem(
-        e.target.parentElement.parentElement.parentElement.parentElement
-      );
+      const todoItem =
+        e.target.parentElement.parentElement.parentElement.parentElement;
 
+      uiController.deleteTodoItem(todoItem);
       uiController.renderTodos();
     }
   });
