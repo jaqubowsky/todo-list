@@ -1,17 +1,10 @@
 import { createTodo } from "./todo";
-import createProject from "./project";
-import projectsContainer from "./allProjects";
+import createProject from "./todoList";
+import projectsContainer from "./projects";
 
 export const uiController = (function () {
-  const allProjects = projectsContainer();
-
-  const getSelectedProject = () => {
-    const activeTab = document.querySelector(".active");
-
-    return allProjects
-      .getProjects()
-      .filter((project) => project.getId() == activeTab.dataset.id)[0];
-  };
+  const projects = projectsContainer();
+  const allProjects = projects.getProjects();
 
   const updateSelectedProjectTitle = () => {
     const activeTab = document.querySelector(".active");
@@ -27,19 +20,27 @@ export const uiController = (function () {
   };
 
   const renderTodos = () => {
+    const activeTab = document.querySelector(".active");
     const todoContainer = document.getElementById("todoContainer");
-    let todoContainerHTML = "";
     todoContainer.innerHTML = "";
 
-    getSelectedProject()
+    if (
+      projects.getSelectedProject(activeTab.dataset.id).getTodos().length === 0
+    )
+      return;
+
+    let todoContainerHTML = "";
+
+    projects
+      .getSelectedProject(activeTab.dataset.id)
       .getTodos()
       .forEach(
         (todo) =>
           (todoContainerHTML += ` 
-          <div class="todo-item ${todo.priority.toLowerCase()}" data-id="${todo.getId()}">
+          <div class="todo-item ${todo.priority.toLowerCase()} ${todo.getIsComplete()}" data-id="${todo.getId()}">
             <div class="todo-info">
                 <button class="todo-btn checkbox-btn">
-                  <i class="fa-regular fa-square"></i>
+                  <i class="fa-regular ${todo.getIcon()} checkbox"></i>
                 </button>
                 <p class="todo-name">${todo.title}</p>
                 </div>
@@ -78,7 +79,7 @@ export const uiController = (function () {
     const projectTitle = document.getElementById("projectTitle").value;
     const newProject = createProject(projectTitle);
 
-    allProjects.add(newProject);
+    projects.add(newProject);
 
     return newProject;
   };
@@ -114,11 +115,24 @@ export const uiController = (function () {
     return createTodo(todoTitle, todoNotes, todoPriority, false, todoDueDate);
   };
 
+  const changeIsDoneStatus = (target) => {
+    const activeTab = document.querySelector(".active");
+
+    projects
+      .getSelectedProject(activeTab.dataset.id)
+      .getTodos()
+      .forEach((todo) => {
+        if (todo.getId() === target.dataset.id) {
+          todo.changeIsComplete();
+        }
+      });
+  };
+
   const addTodoItem = () => {
     const activeTab = document.querySelector(".active");
     const newTodo = createTodoItem();
 
-    allProjects.getProjects().forEach((project) => {
+    allProjects.forEach((project) => {
       if (
         project.getId() === activeTab.dataset.id ||
         project.getTitle() === "Home"
@@ -128,7 +142,7 @@ export const uiController = (function () {
   };
 
   const deleteTodoItem = (todoTarget) => {
-    allProjects.getProjects().forEach((project) => {
+    allProjects.forEach((project) => {
       project.deleteTodo(todoTarget);
     });
   };
@@ -136,7 +150,7 @@ export const uiController = (function () {
   const deleteProjectItem = (projectTarget) => {
     const projectsSection = document.getElementById("projectsSectionContainer");
 
-    allProjects.deleteProject(projectTarget);
+    projects.deleteProject(projectTarget);
 
     projectsSection.removeChild(projectTarget);
   };
@@ -163,9 +177,9 @@ export const uiController = (function () {
     clearInputs,
     renderModal,
     renderTodos,
-    getSelectedProject,
     switchActiveStatus,
     deleteProjectItem,
+    changeIsDoneStatus,
     allProjects,
   };
 })();
