@@ -1,12 +1,17 @@
 import { uiController } from "./ui";
+import createProject from "./project";
 
 export const eventListeners = (function () {
+  const mainContainer = document.getElementById("mainSectionContainer");
   const formsContainer = document.querySelectorAll("form");
   const exitBtn = document.getElementById("exitBtn");
   const todoTab = document.querySelector("[data-todo-tab]");
   const projectTab = document.querySelector("[data-project-tab]");
   const formTodoContainer = document.getElementById("formTodoContainer");
   const formProjectContainer = document.getElementById("formProjectContainer");
+  const projectsSectionContainer = document.getElementById(
+    "projectsSectionContainer"
+  );
   const navModalTab = document.querySelectorAll(".modal-tab");
 
   document.addEventListener("click", (e) => {
@@ -35,13 +40,43 @@ export const eventListeners = (function () {
     if (e.target === exitBtn) {
       document.querySelector(".todo-modal").classList.add("hidden");
     }
+
+    if (e.target.classList.contains("delete-project-btn")) {
+      if (e.target.parentElement.parentElement.classList.contains("active")) {
+        const tabs = document.querySelectorAll(".tab");
+        uiController.switchActiveStatus(
+          projectsSectionContainer.lastChild,
+          tabs
+        );
+
+        if (projectsSectionContainer.children.length === 1) {
+          uiController.switchActiveStatus(mainContainer.firstChild, tabs);
+        }
+      }
+
+      uiController.deleteProjectItem(e.target.parentElement.parentElement);
+    }
+
+    if (e.target.classList.contains("delete-todo-btn")) {
+      uiController.deleteTodoItem(
+        e.target.parentElement.parentElement.parentElement.parentElement
+      );
+
+      uiController.renderTodos();
+    }
   });
 
   formsContainer.forEach((form) => {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       if (e.submitter.classList.contains("add-project-btn")) {
+        const tabs = document.querySelectorAll(".tab");
+
         uiController.renderProject();
+        uiController.switchActiveStatus(
+          projectsSectionContainer.lastChild,
+          tabs
+        );
       }
       if (e.submitter.classList.contains("add-todo-btn")) {
         uiController.addTodoItem();

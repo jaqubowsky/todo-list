@@ -13,6 +13,13 @@ export const uiController = (function () {
       .filter((project) => project.getId() == activeTab.dataset.id)[0];
   };
 
+  const updateSelectedProjectTitle = () => {
+    const activeTab = document.querySelector(".active");
+    let activeProjectTitle = document.getElementById("activeProjectTitle");
+
+    activeProjectTitle.textContent = activeTab.textContent;
+  };
+
   const toggleModalVisibility = () => {
     const openAddModal = document.getElementById("todoModal");
 
@@ -45,8 +52,8 @@ export const uiController = (function () {
                 <button class="todo-btn btn-details">
                 <i class="fa-regular fa-circle-question"></i>
                 </button>
-                <button class="todo-btn delete-btn">
-                  <i class="fa-regular fa-trash-can"></i>
+                <button class="todo-btn delete-todo-btn">
+                  <i class="fa-regular fa-trash-can delete-todo-btn"></i>
                 </button>
                 </div>
                 </div>
@@ -63,12 +70,14 @@ export const uiController = (function () {
     tabs.forEach((tab) => tab.classList.remove("active"));
 
     target.classList.add("active");
+
+    updateSelectedProjectTitle();
   };
 
   const createProjectItem = () => {
     const projectTitle = document.getElementById("projectTitle").value;
-
     const newProject = createProject(projectTitle);
+
     allProjects.add(newProject);
 
     return newProject;
@@ -77,13 +86,22 @@ export const uiController = (function () {
   const renderProject = () => {
     const projectsSection = document.getElementById("projectsSectionContainer");
     const projectItem = document.createElement("li");
-    projectItem.classList.add(
-      `${createProjectItem().getTitle().toLowerCase()}-tab}`
-    );
-    projectItem.classList.add("tab");
-    projectItem.dataset.id = createProjectItem().getId();
-    projectItem.textContent = createProjectItem().getTitle();
+    const deleteBtn = document.createElement("button");
+    const trashIcon = document.createElement("i");
+    const newProject = createProjectItem();
 
+    projectItem.classList.add(`${newProject.getTitle().toLowerCase()}-tab`);
+    projectItem.classList.add("tab");
+    deleteBtn.classList.add("todo-btn");
+    deleteBtn.classList.add("delete-project-btn");
+    trashIcon.classList.add("fa-regular");
+    trashIcon.classList.add("fa-trash-can");
+    trashIcon.classList.add("delete-project-btn");
+    projectItem.dataset.id = newProject.getId();
+    projectItem.textContent = newProject.getTitle();
+
+    deleteBtn.appendChild(trashIcon);
+    projectItem.appendChild(deleteBtn);
     projectsSection.appendChild(projectItem);
   };
 
@@ -93,25 +111,34 @@ export const uiController = (function () {
     const todoDueDate = document.getElementById("todoDueDate").value;
     const todoPriority = document.getElementById("todoPriority").value;
 
-    return (newTodoItem = createTodo(
-      todoTitle,
-      todoNotes,
-      todoPriority,
-      false,
-      todoDueDate
-    ));
+    return createTodo(todoTitle, todoNotes, todoPriority, false, todoDueDate);
   };
 
   const addTodoItem = () => {
     const activeTab = document.querySelector(".active");
+    const newTodo = createTodoItem();
 
     allProjects.getProjects().forEach((project) => {
       if (
         project.getId() === activeTab.dataset.id ||
         project.getTitle() === "Home"
       )
-        project.add(createTodoItem());
+        project.add(newTodo);
     });
+  };
+
+  const deleteTodoItem = (todoTarget) => {
+    allProjects.getProjects().forEach((project) => {
+      project.deleteTodo(todoTarget);
+    });
+  };
+
+  const deleteProjectItem = (projectTarget) => {
+    const projectsSection = document.getElementById("projectsSectionContainer");
+
+    allProjects.deleteProject(projectTarget.dataset.id);
+
+    projectsSection.removeChild(projectTarget);
   };
 
   const renderModal = (target) => {
@@ -131,12 +158,14 @@ export const uiController = (function () {
   return {
     toggleModalVisibility,
     renderProject,
+    deleteTodoItem,
     addTodoItem,
     clearInputs,
     renderModal,
     renderTodos,
     getSelectedProject,
     switchActiveStatus,
+    deleteProjectItem,
     allProjects,
   };
 })();

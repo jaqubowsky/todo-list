@@ -14,13 +14,13 @@ export const pageInitializer = (function () {
         project.getTitle() === "Today" ||
         project.getTitle() === "Week"
       ) {
-        mainSection.innerHTML += `<li class="home-tab tab" data-id="${project.getId()}">${project.getTitle()} </li>`;
+        mainSection.innerHTML += `<li class="main-tab tab" data-id="${project.getId()}">${project.getTitle()} </li>`;
       }
     });
 
-    const homeTab = document.querySelector(".home-tab");
+    const mainTab = document.querySelector(".main-tab");
     const tabs = document.querySelectorAll(".tab");
-    uiController.switchActiveStatus(homeTab, tabs);
+    uiController.switchActiveStatus(mainTab, tabs);
   };
 
   const renderSampleProjects = () => {
@@ -28,7 +28,9 @@ export const pageInitializer = (function () {
 
     allProjects.getProjects().forEach((project) => {
       if (project.getTitle() === "Gym" || project.getTitle() === "Book") {
-        projectsSection.innerHTML += `<li class="home-tab tab" data-id="${project.getId()}">${project.getTitle()} </li>`;
+        projectsSection.innerHTML += `<li class="main-tab tab" data-id="${project.getId()}">${project.getTitle()}<button class="todo-btn delete-project-btn">
+                  <i class="fa-regular fa-trash-can delete-project-btn"></i>
+                </button></li>`;
       }
     });
   };
