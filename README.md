@@ -49,7 +49,7 @@
 ## About The Project
 
 <p align="center">
-[<img alt="todo app preview" width="40px" src="src/images/mobile.png" />](https://jaqubowsky.github.io/todo-list/)
+[<img alt="todo app preview" src="src/images/mobile.png" />](https://jaqubowsky.github.io/todo-list/)
 </p>
   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
