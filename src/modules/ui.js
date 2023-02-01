@@ -36,7 +36,7 @@ export const uiController = (function () {
       .forEach(
         (todo) =>
           (todoContainerHTML += ` 
-          <div class="todo-item" id="${todo.getId()}">
+          <div class="todo-item ${todo.priority.toLowerCase()}" data-id="${todo.getId()}">
             <div class="todo-info">
                 <button class="todo-btn checkbox-btn">
                   <i class="fa-regular fa-square"></i>
@@ -136,7 +136,7 @@ export const uiController = (function () {
   const deleteProjectItem = (projectTarget) => {
     const projectsSection = document.getElementById("projectsSectionContainer");
 
-    allProjects.deleteProject(projectTarget.dataset.id);
+    allProjects.deleteProject(projectTarget);
 
     projectsSection.removeChild(projectTarget);
   };
