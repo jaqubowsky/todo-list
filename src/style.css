@@ -97,6 +97,10 @@ i {
   list-style-type: none;
 }
 
+.tab .delete-project-btn, .delete-todo-btn {
+  float: right;
+}
+
 /* TODO ITEMS */
 
 .project-title {
@@ -222,8 +226,6 @@ i {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 0.6em 0;
 }
 
 input,

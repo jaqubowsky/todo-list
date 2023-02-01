@@ -15,8 +15,12 @@ export default function projectsContainer() {
   }
 
   function getProjects() {
-    return projects
+    return projects;
   }
 
-  return { getProjects, add };
+  function deleteProject(id) {
+    projects = projects.filter((projectItem) => projectItem.getId() !== id);
+  }
+
+  return { getProjects, add, deleteProject };
 }
