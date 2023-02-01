@@ -1,10 +1,116 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/2caf16760b.js"
+      crossorigin="anonymous"
+    ></script>
     <title>ToDo</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <script defer="defer" src="main.bundle.js"></script>
-  </head>
-  <body></body>
+  <script defer src="main.bundle.js"></script></head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="header">
+          <h1 class="header-title title">
+            // TO-DO <i class="fa-regular fa-clipboard"></i>
+          </h1>
+        </div>
+        <div class="main">
+          <div class="main-left">
+            <nav class="side-bar">
+              <div class="main-section-container">
+                <h2 class="main-title title">
+                  <i class="fa-sharp fa-solid fa-calendar-week"></i>Main
+                </h2>
+                <ul class="nav-bar" id="mainSectionContainer"></ul>
+              </div>
+              <div class="projects-section-container">
+                <h2 class="projects-title title">
+                  <i class="fa-sharp fa-solid fa-calendar-week"></i>Projects
+                </h2>
+                <ul class="nav-bar" id="projectsSectionContainer"></ul>
+              </div>
+            </nav>
+          </div>
+          <div class="main-right">
+            <h2 class="active-project-title" id="activeProjectTitle"></h2>
+            <div class="todo-container" id="todoContainer"></div>
+            <button class="btn add-btn">+</button>
+          </div>
+        </div>
+        <div class="footer"></div>
+      </div>
+    </div>
+    <div class="todo-modal hidden" id="todoModal">
+      <div class="modal-inner">
+        <h2>Create new...</h2>
+        <nav class="modal-nav">
+          <ul class="modal-tab active" data-project-tab>
+            Project
+          </ul>
+          <ul class="modal-tab" data-todo-tab>
+            Todo
+          </ul>
+        </nav>
+        <form
+          class="form-project-container form-container hidden"
+          id="formProjectContainer"
+          data-name="Project"
+        >
+          <label for="projectTitle">Project title: </label>
+          <input
+            type="text"
+            class="project-title"
+            id="projectTitle"
+            name="projectTitle"
+            maxlength="12"
+            required
+          />
+          <button type="submit" class="btn add-project-btn">Add project</button>
+        </form>
+        <form
+          class="form-todo-container form-container hidden"
+          id="formTodoContainer"
+          data-name="Todo"
+        >
+          <label for="todoTitle">Todo title: </label>
+          <input
+            type="text"
+            class="todo-title"
+            id="todoTitle"
+            name="todoTitle"
+            maxlength="12"
+            required
+          />
+          <label for="todoNote">Todo note: </label>
+          <input
+            type="textarea"
+            class="todo-note"
+            id="todoNote"
+            name="todoNote"
+            required
+          />
+          <label for="todoDate">Todo due date: </label>
+          <input
+            type="date"
+            class="todo-dueDate"
+            id="todoDueDate"
+            name="todoDueDate"
+            required
+          />
+          <label for="todoPriority">Todo priority: </label>
+          <select for="todoPriority" name="todoPriority" id="todoPriority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+          <button type="submit" class="btn add-todo-btn">Add todo</button>
+        </form>
+        <button class="exit-btn" id="exitBtn">X</button>
+      </div>
+    </div>
+  </body>
 </html>
