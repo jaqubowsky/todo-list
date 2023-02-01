@@ -12,11 +12,11 @@
     Simple todo list project
     <br />
     <br />
-    <a href="https://jaqubowsky.github.io/restaurant-page/">View Demo</a>
+    <a href="https://jaqubowsky.github.io/todo-list/">View Demo</a>
     ·
-    <a href="https://github.com/jaqubowsky/restaurant-page/issues">Report Bug</a>
+    <a href="https://github.com/jaqubowsky/todo-list/issues">Report Bug</a>
     ·
-    <a href="https://github.com/jaqubowsky/restaurant-page/issues">Request Feature</a>
+    <a href="https://github.com/jaqubowsky/todo-list/issues">Request Feature</a>
   </p>
 </div>
 
@@ -108,4 +108,4 @@ Project Link: (https://github.com/jaqubowsky/todo-list)
 [JavaScript]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
 [HTML5]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
 [CSS3]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
-[product-screenshot]: src/images/mobile.jpg
+[product-screenshot]: src/images/mobile.png
