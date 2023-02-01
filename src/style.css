@@ -150,6 +150,11 @@ i {
   margin: 0 0.3em;
 }
 
+.true {
+  text-decoration: line-through;
+  color: lightgrey;
+}
+
 /* PROJECT */
 
 .active-project-title {
