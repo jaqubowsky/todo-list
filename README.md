@@ -84,13 +84,15 @@
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LEFT TO DO -->
-## Left to do
+### Left to do
 
-· show details
-· edit todo details
-· edit project name
-· sort todos by date
-· firebase or local storage
+<ul>
+<li>show details</li>
+<li>edit todo details</li>
+<li>edit project name</li>
+<li>sort todos by date</li>
+<li> firebase or local storage</li>
+</ul>
 
 <!-- CONTACT -->
 ## Contact
@@ -108,4 +110,4 @@ Project Link: (https://github.com/jaqubowsky/todo-list)
 [JavaScript]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
 [HTML5]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
 [CSS3]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
-[product-screenshot]: src/images/mobile.png
+[product-screenshot]: src/images/comp.png
