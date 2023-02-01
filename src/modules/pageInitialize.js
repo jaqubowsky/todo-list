@@ -8,7 +8,7 @@ export const pageInitializer = (function () {
   const renderSampleHome = () => {
     const mainSection = document.getElementById("mainSectionContainer");
 
-    allProjects.getProjects().forEach((project) => {
+    allProjects.forEach((project) => {
       if (
         project.getTitle() === "Home" ||
         project.getTitle() === "Today" ||
@@ -26,7 +26,7 @@ export const pageInitializer = (function () {
   const renderSampleProjects = () => {
     const projectsSection = document.getElementById("projectsSectionContainer");
 
-    allProjects.getProjects().forEach((project) => {
+    allProjects.forEach((project) => {
       if (project.getTitle() === "Gym" || project.getTitle() === "Book") {
         projectsSection.innerHTML += `<li class="project-tab tab" data-id="${project.getId()}">${project.getTitle()}<button class="todo-btn delete-project-btn">
                   <i class="fa-regular fa-trash-can delete-project-btn"></i>
