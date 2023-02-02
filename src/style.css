@@ -1,26 +1,76 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
 *,
-*::after,
-*::before {
-  margin: 0;
-  padding: 0;
+*::before,
+*::after {
   box-sizing: border-box;
+  margin: 0;
+}
+
+/*
+  3. Allow percentage-based heights in the application
+*/
+html,
+body {
+  height: 100%;
+}
+/*
+  Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  6. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  7. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+  8. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
 }
 
 body {
   text-align: left;
   font-family: "Roboto", sans-serif;
   color: #374958;
-  position: relative;
 }
 
 /* MAIN LAYOUT */
 
 .container {
-  font-size: 1.3rem;
-  min-height: 100vh;
+  font-size: 1.2rem;
   height: 100%;
+  position: relative;
 }
 
 .title {
@@ -49,18 +99,19 @@ i {
 .main {
   display: grid;
   grid-template-rows: 1fr 1fr;
+  height: 100%;
+  width: 100%;
 }
 
 .main-left,
 .main-right {
-  padding: 0.3em 1em;
+  padding: 0 1em;
   height: 100%;
+  width: 100%;
 }
 
 .main-right {
   background-color: #ececec;
-  min-height: 100%;
-  height: 100%;
 }
 
 .main-section-container,
@@ -73,6 +124,11 @@ i {
 }
 
 /* NAV BAR */
+
+.nav-bar {
+  display: grid;
+  padding-left: 0.4em;
+}
 
 .projects-title,
 .main-title,
@@ -97,9 +153,9 @@ i {
   list-style-type: none;
 }
 
-.tab .delete-project-btn,
-.delete-todo-btn {
-  float: right;
+.tab:hover,
+.modal-tab:hover {
+  background-color: #2abd6770;
 }
 
 /* TODO ITEMS */
@@ -167,23 +223,37 @@ i {
   border-radius: 7px;
 }
 
+.project-tab {
+  display: inline-flex;
+  justify-content: space-between;
+}
+
 /* BUTTONS */
 .btn {
   cursor: pointer;
-  background-color: #2abd67 !important;
+  background-color: #2abd67;
+  box-shadow: 0px 11px 14px -7px #3e7327;
+  text-shadow: 0px 1px 0px #5b8a3c;
   font-size: 1.5rem;
-  color: #252525;
-  font-family: inherit !important;
+  color: whitesmoke;
 }
 
 .add-btn {
   position: fixed;
   right: 20px;
   bottom: 20px;
-  border: 0.5px solid #252525;
+  border: none;
   border-radius: 50%;
   width: 50px;
   height: 50px;
+}
+
+.btn:hover {
+  background-color: #2abd67cb;
+}
+
+.btn:active {
+  background-color: #2abd67b6;
 }
 
 .add-project-btn,
@@ -194,11 +264,18 @@ i {
   padding: 0.2em 0.5em;
 }
 
+.fa-regular:hover {
+  color: green;
+}
+
+.fa-square-check {
+  color: green;
+}
+
 .todo-btn,
 .exit-btn {
   background-color: transparent;
   border: none;
-  font-size: inherit;
   text-align: center;
   cursor: pointer;
 }
@@ -220,7 +297,7 @@ i {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   min-height: 100vh;
   height: 100%;
   top: 0;
@@ -234,6 +311,7 @@ i {
   position: absolute;
   z-index: 9999;
   background-color: whitesmoke;
+  max-width: 500px;
   width: 90%;
   padding: 1em;
   font-size: 1.2rem;
@@ -249,11 +327,32 @@ input,
 select {
   outline-color: #2abd67;
   padding: 0.7em;
-  font-size: inherit;
-  font-family: inherit;
   margin-bottom: 0.7em;
 }
 
 .hidden {
   display: none;
+}
+
+/* MEDIA QUERIES */
+
+@media (min-width: 750px) {
+  .main {
+    grid-template-columns: 4fr 6fr;
+    grid-template-rows: auto;
+  }
+
+  .container {
+    font-size: 1.5rem;
+  }
+
+  .add-btn {
+    font-size: 2rem;
+    display: block;
+    position: static;
+    width: 125px;
+    border: none;
+    border-radius: 7px;
+    margin: 10px auto 0 auto;
+  }
 }
