@@ -9,34 +9,24 @@ export const createTodo = (
 ) => {
   const id = uuid4();
 
-  const getId = () => id;
-
-  const editData = (title, notes, priority) => {
-    (this.title = title), (this.notes = notes), (this.priority = priority);
-  };
-
-  const getIcon = () => {
-    return isComplete ? "fa-square-check" : "fa-square";
-  };
-
-  const getIsComplete = () => {
-    return isComplete
-  }
-
-  const changeIsComplete = () => {
-    isComplete = !isComplete
-  }
-
-  return {
+  let todo = {
     title,
     dueDate,
     notes,
     priority,
     isComplete,
-    getId,
-    editData,
-    getIcon,
-    changeIsComplete,
-    getIsComplete,
+  };
+
+  return {
+    ...todo,
+    getId: () => id,
+    getIcon: () => (isComplete ? "fa-square-check" : "fa-square"),
+    changeIsComplete: () => {
+      todo = {
+        ...todo,
+        isComplete: !todo.isComplete,
+      };
+    },
+    getIsComplete: () => todo.isComplete,
   };
 };

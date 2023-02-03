@@ -1,21 +1,12 @@
 import createProject from "./todoList";
 
 export default function projectsContainer() {
-  const homeTab = new createProject("Home");
-  const todayTab = new createProject("Today");
-  const weekTab = new createProject("Week");
+  let projects = [];
 
-  const gymTab = new createProject("Gym");
-  const bookTab = new createProject("Book");
-
-  let projects = [homeTab, todayTab, weekTab, gymTab, bookTab];
-
-  function add(project) {
+  function addProject(title) {
+    const project = new createProject(title);
     projects.push(project);
-  }
-
-  function getProjects() {
-    return projects;
+    return project;
   }
 
   function deleteProject(target) {
@@ -24,9 +15,13 @@ export default function projectsContainer() {
     );
   }
 
-  function getSelectedProject(id) {
-    return projects.filter((project) => project.getId() === id)[0];
+  function getProjects() {
+    return projects;
   }
 
-  return { getProjects, add, deleteProject, getSelectedProject };
+  function getSelectedProject(id) {
+    return projects.find((project) => project.getId() === id);
+  }
+
+  return { getProjects, addProject, deleteProject, getSelectedProject };
 }

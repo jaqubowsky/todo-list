@@ -4,7 +4,6 @@ import projectsContainer from "./projects";
 
 export const uiController = (function () {
   const projects = projectsContainer();
-  const allProjects = projects.getProjects();
 
   const updateSelectedProjectTitle = () => {
     const activeTab = document.querySelector(".active");
@@ -24,19 +23,17 @@ export const uiController = (function () {
     const todoContainer = document.getElementById("todoContainer");
     todoContainer.innerHTML = "";
 
-    if (
-      projects.getSelectedProject(activeTab.dataset.id).getTodos().length === 0
-    )
-      return;
+    const selectedProject = projects.getSelectedProject(activeTab.dataset.id);
+    if (!selectedProject) return;
+
+    const todos = selectedProject.getTodos();
+    if (todos.length === 0) return;
 
     let todoContainerHTML = "";
 
-    projects
-      .getSelectedProject(activeTab.dataset.id)
-      .getTodos()
-      .forEach(
-        (todo) =>
-          (todoContainerHTML += ` 
+    todos.forEach(
+      (todo) =>
+        (todoContainerHTML += ` 
           <div class="todo-item ${todo.priority.toLowerCase()} ${todo.getIsComplete()}" data-id="${todo.getId()}">
             <div class="todo-info">
                 <button class="todo-btn checkbox-btn">
@@ -60,7 +57,7 @@ export const uiController = (function () {
                 </div>
               </div>
               `)
-      );
+    );
 
     todoContainer.innerHTML = todoContainerHTML;
   };
@@ -77,11 +74,8 @@ export const uiController = (function () {
 
   const createProjectItem = () => {
     const projectTitle = document.getElementById("projectTitle").value;
-    const newProject = createProject(projectTitle);
 
-    projects.add(newProject);
-
-    return newProject;
+    return projects.addProject(projectTitle);
   };
 
   const renderProject = () => {
@@ -99,7 +93,7 @@ export const uiController = (function () {
     trashIcon.classList.add("fa-trash-can");
     trashIcon.classList.add("delete-project-btn");
     projectItem.dataset.id = newProject.getId();
-    projectItem.textContent = newProject.getTitle();
+    projectItem.textContent = newProject.title;
 
     deleteBtn.appendChild(trashIcon);
     projectItem.appendChild(deleteBtn);
@@ -112,36 +106,43 @@ export const uiController = (function () {
     const todoDueDate = document.getElementById("todoDueDate").value;
     const todoPriority = document.getElementById("todoPriority").value;
 
-    return createTodo(todoTitle, todoNotes, todoPriority, false, todoDueDate);
+    const newTodoItem = createTodo(
+      todoTitle,
+      todoNotes,
+      todoPriority,
+      false,
+      todoDueDate
+    );
+
+    return newTodoItem;
   };
 
   const changeIsDoneStatus = (target) => {
     const activeTab = document.querySelector(".active");
 
-    projects
-      .getSelectedProject(activeTab.dataset.id)
+    const selectedProject = projects.getSelectedProject(activeTab.dataset.id);
+
+    const targetTodo = selectedProject
       .getTodos()
-      .forEach((todo) => {
-        if (todo.getId() === target.dataset.id) {
-          todo.changeIsComplete();
-        }
-      });
+      .find((todo) => todo.getId() === target.dataset.id);
+
+    targetTodo.changeIsComplete();
   };
 
   const addTodoItem = () => {
     const activeTab = document.querySelector(".active");
+    const allProjects = projects.getProjects();
     const newTodo = createTodoItem();
 
     allProjects.forEach((project) => {
-      if (
-        project.getId() === activeTab.dataset.id ||
-        project.getTitle() === "Home"
-      )
+      if (project.getId() === activeTab.dataset.id || project.title === "Home")
         project.add(newTodo);
     });
   };
 
   const deleteTodoItem = (todoTarget) => {
+    const allProjects = projects.getProjects();
+
     allProjects.forEach((project) => {
       project.deleteTodo(todoTarget);
     });
@@ -180,6 +181,6 @@ export const uiController = (function () {
     switchActiveStatus,
     deleteProjectItem,
     changeIsDoneStatus,
-    allProjects,
+    projects,
   };
 })();

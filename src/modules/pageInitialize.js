@@ -3,18 +3,28 @@ import { eventListeners } from "./events";
 
 export const pageInitializer = (function () {
   const formProjectContainer = document.getElementById("formProjectContainer");
-  const allProjects = uiController.allProjects;
+  const projects = uiController.projects;
+
+  projects.addProject("Home");
+  projects.addProject("Today");
+  projects.addProject("Week");
+  projects.addProject("Gym");
+  projects.addProject("Book");
 
   const renderSampleHome = () => {
     const mainSection = document.getElementById("mainSectionContainer");
 
-    allProjects.forEach((project) => {
+    projects.getProjects().forEach((project) => {
       if (
-        project.getTitle() === "Home" ||
-        project.getTitle() === "Today" ||
-        project.getTitle() === "Week"
+        project.title === "Home" ||
+        project.title === "Today" ||
+        project.title === "Week"
       ) {
-        mainSection.innerHTML += `<li class="main-tab tab" data-id="${project.getId()}">${project.getTitle()} </li>`;
+        const li = document.createElement("li");
+        li.classList.add("main-tab", "tab");
+        li.setAttribute("data-id", project.getId());
+        li.textContent = project.title;
+        mainSection.appendChild(li);
       }
     });
 
@@ -26,11 +36,22 @@ export const pageInitializer = (function () {
   const renderSampleProjects = () => {
     const projectsSection = document.getElementById("projectsSectionContainer");
 
-    allProjects.forEach((project) => {
-      if (project.getTitle() === "Gym" || project.getTitle() === "Book") {
-        projectsSection.innerHTML += `<li class="project-tab tab" data-id="${project.getId()}">${project.getTitle()}<button class="todo-btn delete-project-btn">
-                  <i class="fa-regular fa-trash-can delete-project-btn"></i>
-                </button></li>`;
+    projects.getProjects().forEach((project) => {
+      if (project.title === "Gym" || project.title === "Book") {
+        const li = document.createElement("li");
+        li.classList.add("project-tab", "tab");
+        li.setAttribute("data-id", project.getId());
+        li.textContent = project.title;
+
+        const button = document.createElement("button");
+        button.classList.add("todo-btn", "delete-project-btn");
+
+        const i = document.createElement("i");
+        i.classList.add("fa-regular", "fa-trash-can", "delete-project-btn");
+
+        button.appendChild(i);
+        li.appendChild(button);
+        projectsSection.appendChild(li);
       }
     });
   };

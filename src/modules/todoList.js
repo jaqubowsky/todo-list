@@ -1,8 +1,6 @@
 import uuid4 from "uuid4";
 
-export default function createProject(name) {
-  const title = name;
-
+export default function createProject(title) {
   const id = uuid4();
   let todos = [];
 
@@ -15,16 +13,12 @@ export default function createProject(name) {
   }
 
   function getTodos() {
-    return Object.freeze([...todos]);
-  }
-
-  function getTitle() {
-    return title;
+    return [...todos];
   }
 
   function getId() {
-    return Object.freeze(id);
+    return id;
   }
 
-  return Object.freeze({ getTitle, add, deleteTodo, getTodos, getId });
+  return { title, add, deleteTodo, getTodos, getId };
 }
