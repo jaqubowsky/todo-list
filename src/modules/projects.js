@@ -19,9 +19,13 @@ export default function projectsContainer() {
     return projects;
   }
 
+  function getProject(name) {
+    return projects.find( (project) => project.title === name)
+  }
+
   function getSelectedProject(id) {
     return projects.find((project) => project.getId() === id);
   }
 
-  return { getProjects, addProject, deleteProject, getSelectedProject };
+  return { getProjects, addProject, deleteProject, getSelectedProject, getProject };
 }

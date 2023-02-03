@@ -1,26 +1,26 @@
 import { createTodo } from "./todo";
-import createProject from "./todoList";
 import projectsContainer from "./projects";
+import { compareAsc, format } from "date-fns";
 
 export const uiController = (function () {
   const projects = projectsContainer();
+  const openAddModal = document.getElementById("todoModal");
+  const activeProjectTitle = document.getElementById("activeProjectTitle");
+  const todoContainer = document.getElementById("todoContainer");
+  const projectsSection = document.getElementById("projectsSectionContainer");
 
   const updateSelectedProjectTitle = () => {
     const activeTab = document.querySelector(".active");
-    let activeProjectTitle = document.getElementById("activeProjectTitle");
 
     activeProjectTitle.textContent = activeTab.textContent;
   };
 
   const toggleModalVisibility = () => {
-    const openAddModal = document.getElementById("todoModal");
-
     openAddModal.classList.toggle("hidden");
   };
 
   const renderTodos = () => {
     const activeTab = document.querySelector(".active");
-    const todoContainer = document.getElementById("todoContainer");
     todoContainer.innerHTML = "";
 
     const selectedProject = projects.getSelectedProject(activeTab.dataset.id);
@@ -66,7 +66,6 @@ export const uiController = (function () {
     if (target.classList.contains("active")) return;
 
     tabs.forEach((tab) => tab.classList.remove("active"));
-
     target.classList.add("active");
 
     updateSelectedProjectTitle();
@@ -79,20 +78,15 @@ export const uiController = (function () {
   };
 
   const renderProject = () => {
-    const projectsSection = document.getElementById("projectsSectionContainer");
     const projectItem = document.createElement("li");
     const deleteBtn = document.createElement("button");
     const trashIcon = document.createElement("i");
     const newProject = createProjectItem();
 
-    projectItem.classList.add("project-tab");
-    projectItem.classList.add("tab");
-    deleteBtn.classList.add("todo-btn");
-    deleteBtn.classList.add("delete-project-btn");
-    trashIcon.classList.add("fa-regular");
-    trashIcon.classList.add("fa-trash-can");
-    trashIcon.classList.add("delete-project-btn");
-    projectItem.dataset.id = newProject.getId();
+    projectItem.classList.add("project-tab", "tab");
+    deleteBtn.classList.add("todo-btn", "delete-project-btn");
+    trashIcon.classList.add("fa-regular", "fa-trash-can", "delete-project-btn");
+    projectItem.setAttribute("data-id", newProject.getId());
     projectItem.textContent = newProject.title;
 
     deleteBtn.appendChild(trashIcon);
@@ -104,17 +98,10 @@ export const uiController = (function () {
     const todoTitle = document.getElementById("todoTitle").value;
     const todoNotes = document.getElementById("todoNote").value;
     const todoDueDate = document.getElementById("todoDueDate").value;
+    const enteredDate = format(new Date(todoDueDate), "dd-MM-yyyy");
     const todoPriority = document.getElementById("todoPriority").value;
 
-    const newTodoItem = createTodo(
-      todoTitle,
-      todoNotes,
-      todoPriority,
-      false,
-      todoDueDate
-    );
-
-    return newTodoItem;
+    return createTodo(todoTitle, todoNotes, todoPriority, false, enteredDate);
   };
 
   const changeIsDoneStatus = (target) => {
@@ -131,13 +118,15 @@ export const uiController = (function () {
 
   const addTodoItem = () => {
     const activeTab = document.querySelector(".active");
-    const allProjects = projects.getProjects();
+
+    const activeProject = projects.getSelectedProject(activeTab.dataset.id);
+    const homeProject = projects.getProject("Home");
+
     const newTodo = createTodoItem();
 
-    allProjects.forEach((project) => {
-      if (project.getId() === activeTab.dataset.id || project.title === "Home")
-        project.add(newTodo);
-    });
+    if (activeTab.dataset.id !== homeProject.getId()) homeProject.add(newTodo);
+
+    activeProject.add(newTodo);
   };
 
   const deleteTodoItem = (todoTarget) => {
@@ -149,8 +138,6 @@ export const uiController = (function () {
   };
 
   const deleteProjectItem = (projectTarget) => {
-    const projectsSection = document.getElementById("projectsSectionContainer");
-
     projects.deleteProject(projectTarget);
 
     projectsSection.removeChild(projectTarget);

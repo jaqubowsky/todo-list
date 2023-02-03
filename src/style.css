@@ -14,7 +14,6 @@ body {
 
 body {
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
   text-align: left;
   font-family: "Roboto", sans-serif;
   color: #374958;
@@ -63,7 +62,7 @@ h6 {
 }
 
 i {
-  margin: 0 0.2em !important;
+  margin: 0 0.2em;
 }
 
 /* HEADER */
@@ -75,18 +74,21 @@ i {
 
 /* MAIN */
 
+.main,
+.main-left,
+.main-right {
+  height: 100%;
+  width: 100%;
+}
+
 .main {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  height: 100%;
-  width: 100%;
 }
 
 .main-left,
 .main-right {
   padding: 0 1em;
-  height: 100%;
-  width: 100%;
 }
 
 .main-right {
@@ -126,9 +128,6 @@ i {
   padding: 0.3em;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.tab {
   list-style-type: none;
 }
 
