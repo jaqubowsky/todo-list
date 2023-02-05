@@ -58,7 +58,6 @@ export const uiController = (function () {
               </div>
               `)
     );
-
     todoContainer.innerHTML = todoContainerHTML;
   };
 
@@ -106,7 +105,6 @@ export const uiController = (function () {
 
   const changeIsDoneStatus = (target) => {
     const activeTab = document.querySelector(".active");
-
     const selectedProject = projects.getSelectedProject(activeTab.dataset.id);
 
     const targetTodo = selectedProject
